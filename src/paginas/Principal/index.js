@@ -2,7 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { Text, View, Image, TouchableOpacity, TextInput, Alert, ScrollView } from 'react-native';
 import estilos from './estilos';
 import { buscarUsuario } from '../services/api';
-import { useIsFocused } from '@react-navigation/native';
+import { useIsFocused, useNavigation } from '@react-navigation/native';
+
 
 export default function Principal({ navigation }) {
     const [nomeUsuario, setNomeUsuario] = useState('');
@@ -10,6 +11,7 @@ export default function Principal({ navigation }) {
     const [buscando, setBuscando] = useState(false);
 
     const isFocused = useIsFocused();
+
 
     useEffect(() => {
         if (nomeUsuario) {
@@ -32,10 +34,7 @@ export default function Principal({ navigation }) {
         finally {
             setBuscando(false);
         }
-
     }
-
-
 
     return (
         <ScrollView>
@@ -57,7 +56,7 @@ export default function Principal({ navigation }) {
                             <Text style={estilos.seguidoresTexto}>Seguindo</Text>
                         </View>
                     </View>
-                    <TouchableOpacity onPress={() => navigation.navigate('Repositorios')}>
+                    <TouchableOpacity onPress={() => navigation.navigate('Repositorios', { usuario })}>
                         <Text style={estilos.repositorios}>
                             Ver os repositórios
                         </Text>

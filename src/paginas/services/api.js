@@ -23,12 +23,21 @@ export async function buscarUsuario(nome) {
         else {
             throw new Error("Muitos usuários encontrados");
         }
-
     }
 
     throw new Error("Informe o login");
+}
 
+export async function buscarRepositorios(usuarioId) {
+    const response = await api.get(`repos?postId=${usuarioId}`);
+    return response.data;
+}
 
-
+export function criarRepositorio(postId, name, data) {
+    return api.post("repos", {
+        name,
+        data,
+        postId,
+    });
 }
 
